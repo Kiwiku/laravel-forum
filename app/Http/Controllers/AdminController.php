@@ -114,7 +114,11 @@ class AdminController extends Controller
     }
     // Edit existing subcategory
     public function editSubcategory($id){
-        return view('catsub.editSubcategory')->with('category', Category::find($id));
+        $category = Category::pluck('category_name', 'category_id');
+        return view('catsub.editSubcategory', ['subcategory' => Subcategory::find($id), 'category' => $category]);
+    }
+    public function updateSubcategory($id){
+
     }
     // Delete existing subcategory
     public function deleteSubcategory(){
