@@ -16,10 +16,12 @@ class AdminController extends Controller
     }
     // Display admins dashboard
     public function index(){
+        $category = Category::all();
+        $subcategory = Subcategory::all();
         if(auth()->user()->id != 1){
             return redirect('/')->with('error', 'Unauthorized page');
         }
-        return view('admin.dashboard');
+        return view('admin.dashboard', ['categories' => $category, 'subcategories' => $subcategory]);
     }
 
     // Display registered users
@@ -31,8 +33,12 @@ class AdminController extends Controller
         <--------- CATEGORIES -------->
     */
 
+    // Display form for adding new category
+    public function displayCreateCategory(){
+        return view('catsub.createCategory');
+    }
     // Add new category
-    public function addCategory(){
+    public function addCategory(Request $request){
         //
     }
     // Edit existing category

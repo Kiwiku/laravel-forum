@@ -15,6 +15,13 @@ Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/admin', 'AdminController@index');
 
+// Categories
+
+Route::get('/admin/createCategory', 'AdminController@displayCreateCategory')->name('createCategory');
+
+
+// Subcategories
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
