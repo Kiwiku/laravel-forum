@@ -34,20 +34,53 @@ class AdminController extends Controller
     */
 
     // Display form for adding new category
-    public function displayCreateCategory(){
+    public function createCategory(){
         return view('catsub.createCategory');
     }
     // Add new category
-    public function addCategory(Request $request){
-        //
+    public function storeCategory(Request $request){
+        // validate $request
+        $this->validate($request, [
+            'category_name' => 'required',
+        ]);
+        // Create new category
+        $category = new Category();
+        $category_name = $request->input('category_name');
+        if(Category::where('category_name', '=', $category_name)->first() != true){
+            $category->category_name = $request->input('category_name');
+            $category->save();
+            return redirect('/admin')->with('success', 'Category created successfully');
+        } else {
+            return redirect('/admin')->with('error', 'This category already exists');
+        }
+
+       
     }
     // Edit existing category
-    public function editCategory(){
-        //
+    public function editCategory($id){
+        return view('catsub.editCategory')->with('category', Category::find($id));
+    }
+    public function updateCategory(Request $request, $id){
+
+        $this->validate($request, [
+            'category_name' => 'required',
+        ]);
+        $category = Category::find($id);
+        $category->category_name = $request->input('category_name');
+        $category->save();
+
+        return redirect('/admin')->with('success', 'Category edited successfuly');
+
     }
     // Delete existing category
-    public function deleteCategory(){
-        //
+    public function deleteCategory($id){
+        $category = Category::find($id);
+        if(!isset($category)){
+            return redirect('/admin')->with('error', 'Category does not exist');
+        }
+        $category->delete();
+        Subcategory::where('category_id', '=', $id)->delete();
+        return redirect('/admin')->with('success', 'Category removed');
     }
 
     /*

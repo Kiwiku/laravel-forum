@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Create Category</h1>
+    <h1>Create Subcategory</h1>
     {!! Form::open(['action' => 'AdminController@storeCategory', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
     <div class="form-group">
         {{Form::label('category_name', 'Category name')}}

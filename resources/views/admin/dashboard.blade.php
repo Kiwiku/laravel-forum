@@ -23,8 +23,12 @@
                         @foreach ($categories as $category)
                         <tr>
                             <td>{{$category->category_name}}</td>
-                            <td><a class='btn btn-primary'>Edit category</a></td>
-                            <td><a class='btn btn-primary'>Delete category</a></td>
+                            <td><a href="{{route('editCategory') . '/' . $category->category_id}}" class='btn btn-primary'>Edit category</a></td>
+                            <td>{!!Form::open(['action' => ['AdminController@deleteCategory', $category->category_id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+                                    {{Form::hidden('_method', 'DELETE')}}
+                                    {{Form::submit('Delete', ['class' => 'btn btn-danger', 'title' => 'Danger: It deletes subcatogories!'])}}
+                                {!!Form::close()!!}
+                            </td>
                         </tr>
                         @endforeach
                 </tbody>
@@ -34,14 +38,14 @@
                     <tr>
                         <td>Subcategory name</td>
                         <td>Category name which subcategory belongs to</td>
-                        <td><a class='btn btn-primary'>Add subcategory</a></td>
+                        <td><a class='btn btn-primary'>Add new subcategory</a></td>
                     </tr>
                 </thead>
                 <tbody>
                         @foreach ($subcategories as $subcategory)
                         <tr>
                             <td>{{$subcategory->subcategory_name}}</td>
-                            <td>{{$subcategory->category->category_name}}
+                            <td>{{$subcategory->category->category_name}}</td>
                             <td><a class='btn btn-primary'>Edit subcategory</a></td>
                             <td><a class='btn btn-primary'>Delete subcategory</a></td>
                         </tr>
