@@ -38,7 +38,7 @@
                     <tr>
                         <td>Subcategory name</td>
                         <td>Category name which subcategory belongs to</td>
-                        <td><a class='btn btn-primary'>Add new subcategory</a></td>
+                        <td><a href={{route('createSubcategory')}} class='btn btn-primary'>Add new subcategory</a></td>
                     </tr>
                 </thead>
                 <tbody>

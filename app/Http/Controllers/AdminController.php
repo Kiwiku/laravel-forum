@@ -88,12 +88,33 @@ class AdminController extends Controller
     */
 
     // Add new subcategory
-    public function addSubcategory(){
+    public function createSubcategory(){
+        $category = Category::pluck('category_name', 'category_id');
+        return view('catsub.createSubcategory')->with('categories', $category);
+    }
+    public function storeSubcategory(Request $request){
+        // validate $request
+        $this->validate($request, [
+            'subcategory_name' => 'required',
+            'category_name' => 'required',
+        ]);
+        // Create new category
+        $subcategory = new Subcategory();
+        $subcategory_name = $request->input('subcategory_name');
+        if(Subcategory::where('subcategory_name', '=', $subcategory_name)->first() != true){
+            $subcategory->subcategory_name = $request->input('subcategory_name');
+            $subcategory->category_id = $request->input('category_name');
+            $subcategory->save();
+            return redirect('/admin')->with('success', 'Subcategory created successfully');
+        } else {
+            return redirect('/admin')->with('error', 'This category already exists');
+        }
 
+       
     }
     // Edit existing subcategory
-    public function editSubcategory(){
-
+    public function editSubcategory($id){
+        return view('catsub.editSubcategory')->with('category', Category::find($id));
     }
     // Delete existing subcategory
     public function deleteSubcategory(){

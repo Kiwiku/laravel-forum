@@ -30,6 +30,12 @@ Route::delete('/admin/destroyCategory/{id}', 'AdminController@deleteCategory')->
 
 // Subcategories
 
+Route::get('/admin/createSubcategory', 'AdminController@createSubcategory')->name('createSubcategory');
+Route::post('/admin/storeCategory', 'AdminController@storeSubcategory')->name('storeSubcategory');
+Route::get('/admin/editSubcategory/{id?}', 'AdminController@editSubcategory')->name('editSubcategory');
+Route::put('/admin/updateSubcategory/{id}', 'AdminController@updateSubcategory')->name('updateSubcategory');
+Route::delete('/admin/destroySubcategory/{id}', 'AdminController@deleteSubcategory')->name('deleteSubcategory');
+
 // ----- Admin pages ------->
 
 // Authentication
