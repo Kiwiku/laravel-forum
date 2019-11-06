@@ -8,7 +8,7 @@
             <table class='table table-dark mt-2'>
                     <thead>
                         <tr>
-                            <td><a class='btn btn-primary'>List all users on forum</a></td>
+                            <td><a href={{route('displayUsers')}} class='btn btn-primary'>Display users</a></td>
                         </tr>
                     </thead>
             </table>

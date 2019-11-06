@@ -24,11 +24,6 @@ class AdminController extends Controller
         return view('admin.dashboard', ['categories' => $category, 'subcategories' => $subcategory]);
     }
 
-    // Display registered users
-    public function users(){
-        //
-    }
-
     /*
         <--------- CATEGORIES -------->
     */

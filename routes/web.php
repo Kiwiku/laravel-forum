@@ -36,7 +36,14 @@ Route::get('/admin/editSubcategory/{id?}', 'AdminController@editSubcategory')->n
 Route::put('/admin/updateSubcategory/{id}', 'AdminController@updateSubcategory')->name('updateSubcategory');
 Route::delete('/admin/destroySubcategory/{id}', 'AdminController@deleteSubcategory')->name('deleteSubcategory');
 
+// Handling users
+
+Route::get('/admin/displayUsers', 'UsersController@displayUsers')->name('displayUsers');
+
+// Roles
+
 // ----- Admin pages ------->
+
 
 // Authentication
 Auth::routes();
