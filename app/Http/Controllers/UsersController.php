@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -13,6 +14,7 @@ class UsersController extends Controller
 
     // Display registered users
     public function displayUsers(){
-        echo 'Hello world!';
+        $users = User::orderBy('created_at', 'desc')->paginate(25);
+        return view('users.displayUsers')->with('users', $users);
     }
 }

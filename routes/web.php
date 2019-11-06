@@ -18,7 +18,7 @@ Route::get('/about', 'PagesController@about');
 
 // <------ Admin pages ----
 
-Route::get('/admin', 'AdminController@index');
+Route::get('/admin', 'AdminController@index')->name('displayDashboard');
 
 // Categories
 
@@ -39,8 +39,17 @@ Route::delete('/admin/destroySubcategory/{id}', 'AdminController@deleteSubcatego
 // Handling users
 
 Route::get('/admin/displayUsers', 'UsersController@displayUsers')->name('displayUsers');
+Route::get('/admin/createUser', 'UsersController@createUser')->name('createUser');
+Route::get('/admin/editUsersRole', 'UsersController@editUsersRole')->name('editUsersRole');
+Route::delete('/admin/deleteUser', 'UsersController@deleteUser')->name('deleteUser');
 
 // Roles
+
+Route::get('/admin/displayRoles', 'RolesController@displayRoles')->name('displayRoles');
+Route::get('/admin/createRole', 'RolesController@createRole')->name('createRole');
+Route::post('/admin/storeRole', 'RolesController@storeRole')->name('storeRole');
+Route::get('/admin/editRole{id?}', 'RolesController@editRole')->name('editRole');
+Route::put('/admin/updateRole/{id}', 'RolesController@updateRole')->name('updateRole');
 
 // ----- Admin pages ------->
 

@@ -9,6 +9,7 @@
                     <thead>
                         <tr>
                             <td><a href={{route('displayUsers')}} class='btn btn-primary'>Display users</a></td>
+                            <td><a href={{route('displayRoles')}} class='btn btn-primary'>Display roles</a></td>
                         </tr>
                     </thead>
             </table>
