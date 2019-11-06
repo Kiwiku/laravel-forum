@@ -15,6 +15,9 @@ class RolesController extends Controller
     // Display roles
     public function displayRoles(){
         $roles = Roles::all();
+        if(auth()->user()->role_id != 1){
+            return redirect('/')->with('error', 'Unauthorized page');
+        }
         return view('roles.display')->with('roles', $roles);
     }
 
