@@ -18,7 +18,7 @@ class AdminController extends Controller
     public function index(){
         $category = Category::all();
         $subcategory = Subcategory::all();
-        if(auth()->user()->id != 1){
+        if(auth()->user()->role_id != 1){
             return redirect('/')->with('error', 'Unauthorized page');
         }
         return view('admin.dashboard', ['categories' => $category, 'subcategories' => $subcategory]);
@@ -117,12 +117,27 @@ class AdminController extends Controller
         $category = Category::pluck('category_name', 'category_id');
         return view('catsub.editSubcategory', ['subcategory' => Subcategory::find($id), 'category' => $category]);
     }
-    public function updateSubcategory($id){
+    public function updateSubcategory(Request $request, $id){
+        $this->validate($request, [
+            'category_name' => 'required',
+            'subcategory_name' => 'required',
+        ]);
+        
+        $subcategory = Subcategory::find($id);
+        $subcategory->subcategory_name = $request->input('subcategory_name');
+        $subcategory->category_id = $request->input('category_name');
+        $subcategory->save();
+        return redirect('/admin')->with('success', 'Subcategory edited succsesfully');
 
     }
     // Delete existing subcategory
-    public function deleteSubcategory(){
-
+    public function deleteSubcategory($id){
+        $subcategory = Subcategory::find($id);
+        if(!isset($subcategory)){
+            return redirect('/admin')->with('error', 'Subcategory does not exist');
+        }
+        $subcategory->delete();
+        return redirect('/admin')->with('success', 'Subcategory removed');
     }
 
     /*
